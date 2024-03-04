@@ -15,11 +15,11 @@
             </tr>
             <tr>
                 <td><label for="id_password">Password:</label></td>
-                <td><input type="password" id="id_password" name="id_password" size="60" pattern="[A-Za-z0-9_,.\-:;?!]{8,20}" title="A-Z, a-z, 0-9, _ , . \ - : ; ? !" placeholder="Enter your password" required></td>
+                <td><input type="password" id="id_password" name="id_password" size="60" pattern="^[A-Za-z0-9_,\.\-:;\?!]{8,20}$" title="A-Z, a-z, 0-9, _ , . \ - : ; ? !" placeholder="Enter your password" required></td>
             </tr>
             <tr>
                 <td><label for="password_again">Password again:</label></td>
-                <td><input type="password" id="password_again" name="password_again" size="60" pattern="[A-Za-z0-9_,.\-:;?!]{8,20}" title="A-Z, a-z, 0-9, _ , . \ - : ; ? !" placeholder="Enter your password" required></td>
+                <td><input type="password" id="password_again" name="password_again" size="60" pattern="^[A-Za-z0-9_,\.\-:;\?!]{8,20}$" title="A-Z, a-z, 0-9, _ , . \ - : ; ? !" placeholder="Enter your password" required></td>
             </tr>
             <tr>
                 <td><label for="male">Gender:</label></td>
@@ -94,7 +94,7 @@
             </tr>
             <tr>
                 <td><label id="outputlabel" for="id_output"></label></td>
-                <td><output id="id_output"></output></td>
+                <td><output size="60" id="id_output"></output></td>
             </tr>
         </table>
     </form>
@@ -106,7 +106,7 @@
             let password = document.getElementById("id_password").value;
             let password2 = document.getElementById("password_again").value;
 
-            if ((/[a-z0-9_,\.\-:;\?!]{8,20}/ig.test(password) === true ) && (/[a-z0-9_,\.\-:;\?!]{8,20}/ig.test(password2) === true)) {
+            if ((/^[\w-,.!?]{8,20}$/g.test(password) === true ) && (/^[\w-,.!?]{8,20}$/g.test(password2) === true)) {
                 passwordValidated = true;
             } else {
                 output.innerText = "Password length 8-20 characters, can contain only following characters: a-z, A-Z, 0-9 and _ , . - : ; ? !";
@@ -151,7 +151,7 @@
 
                 output.innerText = (`Name: ${name} \nPassword:${password} \nPassword2:${password2} \nSelected hobbies: ${hobbies.join(", ")} \nGender: ${selectedGender} \nBirth date: ${birthdate} \nHeight: ${height} \nColor: ${color} \nHome Country: ${selectedCountry} \nProfession: ${selectedProfession} \nMessage: ${message}`)
             } else {
-                output.innerText = "The data entered is not valid. Check required fields and password requirements";
+                output.innerText = "The data entered is not valid.\nCheck required fields and password requirements";
                 output.style.color = "red";
             }
 
