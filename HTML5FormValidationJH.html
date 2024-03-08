@@ -114,17 +114,42 @@
             let name = document.getElementById("fullname").value;
             let heightOutput = document.getElementById("height_output").value;
             let selectedGender = ""
-            
             for (let gender of document.getElementsByName("genderselection")) {
                 if (gender.checked) {
                     selectedGender = gender.value;
                 }
             }
+            let hobbies = [];
+            for (let hobby of document.getElementsByName("hobbies")) {
+            if (hobby.checked) {
+                hobbies.push(hobby.value);
+                }
+            }
+            let birthdate = document.getElementById("birthdate").value;
+            let height = document.getElementById("height").value;
+            let color = document.getElementById("favoritecolor").value;
+            let countryDropdown = document.getElementById("country");
+            let selectedCountry = countryDropdown.options[countryDropdown.selectedIndex].text;
+            let selectedProfession = document.getElementById("profession").value;
+            let outputlabel = document.getElementById("outputlabel");
+            let message = document.getElementById("message").value;
 
             function validateData(condition, errormessage) {
                 if (condition) {
                     errorArray.push(errormessage);
                 }
+            }
+
+            function printValues() {
+                output.innerText =
+                (`Name: ${name} \nPassword:${password} \nPassword2:${password2} \nGender: ${selectedGender} \nSelected hobbies: ${hobbies.join(", ")}
+                Birth date: ${birthdate} \nHeight: ${height} \nColor: ${color} \nHome Country: ${selectedCountry} \nProfession: ${selectedProfession} \nMessage: ${message}`)
+            }
+
+            function printErrors() {
+                for (let error of errorArray) {
+                    output.innerText += error + "\n";
+                };
             }
 
             validateData(name.length == 0, "Give your firstname and lastname");
@@ -134,32 +159,16 @@
             validateData(heightOutput < 40 || heightOutput > 300, "Height must be between 40 and 300");
 
             if (errorArray.length == 0) {
-
-                let hobbies = [];
-                for (let hobby of document.getElementsByName("hobbies")) {
-                if (hobby.checked) {
-                    hobbies.push(hobby.value);
-                    }
-                }
-                let birthdate = document.getElementById("birthdate").value;
-                let height = document.getElementById("height").value;
-                let color = document.getElementById("favoritecolor").value;
-                let countryDropdown = document.getElementById("country");
-                let selectedCountry = countryDropdown.options[countryDropdown.selectedIndex].text;
-                let selectedProfession = document.getElementById("profession").value;
-                let outputlabel = document.getElementById("outputlabel");
-                let message = document.getElementById("message").value;
                 outputlabel.innerText = "Submitted data:";
                 outputlabel.style.fontWeight = "bold";
                 output.style.color = "black";
 
-                output.innerText = (`Name: ${name} \nPassword:${password} \nPassword2:${password2} \nGender: ${selectedGender} \nSelected hobbies: ${hobbies.join(", ")}\nBirth date: ${birthdate} \nHeight: ${height} \nColor: ${color} \nHome Country: ${selectedCountry} \nProfession: ${selectedProfession} \nMessage: ${message}`)
+                printValues();
+                
             } else {
                 output.innerText = "";
-                for (let error of errorArray) {
-                    output.innerText += error + "\n";
-                }
                 output.style.color = "red";
+                printErrors();
             }
 
             event.preventDefault();
