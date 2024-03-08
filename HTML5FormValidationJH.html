@@ -52,12 +52,10 @@
                 <td class="datacolumn"><input id="birthdate" type="date"></td>
             </tr>
             <tr>
-                <td><label for="height">Height:</label></td>
+                <td><label for="height_input">Height:</label></td>
                 <td>
-                    <input type="range" id="height" name="height" value="170" size="40" min="40" max="300" step="1"
-                        oninput="height_output.value = this.value">
-                    <input type="number" id="height_output" name="height_output" value="170" size="40" min="40" max="300"
-                        step="1" oninput="height.value = this.value">
+                    <input type="range" id="height_input" name="height_input" value="170" size="40" min="40" max="300" step="1" oninput="height_output.value = this.value">
+                    <input type="number" id="height_output" name="height_output" value="170" size="40" min="40" max="300" step="1" oninput="height_input.value = this.value">
                 </td>
             </tr>
             <tr>
@@ -126,7 +124,7 @@
                 }
             }
             let birthdate = document.getElementById("birthdate").value;
-            let height = document.getElementById("height").value;
+            let height = parseFloat(document.getElementById("height_input").value);
             let color = document.getElementById("favoritecolor").value;
             let countryDropdown = document.getElementById("country");
             let selectedCountry = countryDropdown.options[countryDropdown.selectedIndex].text;
